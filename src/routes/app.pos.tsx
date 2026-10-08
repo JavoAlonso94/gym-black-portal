@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { PRODUCTS, money, type Product } from "@/lib/data";
 import { placeOrder, useMenu } from "@/lib/kitchen";
+import { PaymentDialog, METHODS } from "@/components/PaymentDialog";
+import { changeStock, recordIncome, useStock } from "@/lib/erp";
 import { clearPosCharges, removePosCharge, usePosCharges } from "@/lib/crm";
 
 export const Route = createFileRoute("/app/pos")({
@@ -19,9 +21,9 @@ const CATS = ["Todos", "Suplementos", "Ropa", "Bebidas", "Cafetería"] as const;
 
 function POS() {
   const [cat, setCat] = useState<(typeof CATS)[number]>("Todos");
-  const [stock, setStock] = useState<Record<string, number>>(Object.fromEntries(PRODUCTS.map((p) => [p.id, p.stock])));
+  const stock = useStock();
+  const [payOpen, setPayOpen] = useState(false);
   const [cart, setCart] = useState<Record<string, number>>({});
-  const [method, setMethod] = useState("Efectivo");
   const [sales, setSales] = useState<Sale[]>([]);
   const [ticket, setTicket] = useState<Sale | null>(null);
   const [cut, setCut] = useState(false);
@@ -43,6 +45,11 @@ function POS() {
 
   const pay = () => {
     if (!items.length && !kitems.length && !charges.length) { toast.error("El carrito está vacío"); return; }
+    setPayOpen(true);
+  };
+  const finish = (method: string) => {
+    setPayOpen(false);
+    recordIncome(`Venta POS #${4822 + sales.length}`, subtotal, method, "POS");
     if (kitems.length) {
       const o = placeOrder({ customer: customer || "Mostrador", items: kitems.map(({ m, q }) => ({ id: m.id, name: m.name, q, price: m.price })), total: kitems.reduce((s, i) => s + i.m.price * i.q, 0), source: "POS", paid: true });
       toast.success(`Comanda #${o.id} enviada a cocina`);
@@ -50,7 +57,7 @@ function POS() {
     const all = [...items, ...kitems.map(({ m, q }) => ({ p: { id: m.id, name: m.name, cat: "Bebidas" as const, price: m.price, stock: 0 }, q })), ...charges.map((c) => ({ p: { id: c.id, name: `Paquete ${c.pack} (${c.customer})`, cat: "Ropa" as const, price: c.price, stock: 0 }, q: 1 }))];
     clearPosCharges();
     const sale: Sale = { folio: 4822 + sales.length, items: all, total: subtotal, method, time: new Date().toLocaleTimeString("es-MX") };
-    setStock((s) => { const n = { ...s }; items.forEach((i) => (n[i.p.id] = (n[i.p.id] ?? 0) - i.q)); return n; });
+    changeStock(Object.fromEntries(items.map((i) => [i.p.id, -i.q])));
     setSales((s) => [sale, ...s]); setCart({}); setKcart({}); setCustomer(""); setTicket(sale);
   };
 
@@ -112,13 +119,12 @@ function POS() {
             <div className="flex justify-between text-muted-foreground"><span>IVA (16%)</span><span>{money(iva)}</span></div>
             <div className="flex justify-between text-lg font-bold"><span>Total</span><span className="text-primary">{money(subtotal)}</span></div>
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            {["Efectivo", "Tarjeta", "Transferencia"].map((m) => <button key={m} onClick={() => setMethod(m)} className={`rounded-md border py-2 text-xs ${method === m ? "border-primary text-primary" : ""}`}>{m}</button>)}
-          </div>
+          <p className="mt-4 text-xs text-muted-foreground">Efectivo · SPEI · OXXO Pay · Clip</p>
           <Button onClick={pay} className="mt-4 w-full bg-gold font-semibold"><Receipt className="h-4 w-4" />Cobrar {money(subtotal)}</Button>
         </Panel>
       </div>
 
+      <PaymentDialog open={payOpen} amount={subtotal} concept="Venta en punto de venta" onClose={() => setPayOpen(false)} onPaid={finish} />
       <Dialog open={!!ticket} onOpenChange={(o) => !o && setTicket(null)}>
         <DialogContent className="max-w-sm font-mono text-sm">
           <DialogHeader><DialogTitle className="text-center font-display">GYM BLACK</DialogTitle></DialogHeader>
@@ -140,7 +146,7 @@ function POS() {
           <DialogHeader><DialogTitle>Corte de caja</DialogTitle></DialogHeader>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between"><span>Fondo inicial</span><span>{money(1500)}</span></div>
-            {["Efectivo", "Tarjeta", "Transferencia"].map((m) => <div key={m} className="flex justify-between"><span>{m}</span><span>{money(byMethod[m] ?? 0)}</span></div>)}
+            {METHODS.map((m) => <div key={m} className="flex justify-between"><span>{m}</span><span>{money(byMethod[m] ?? 0)}</span></div>)}
             <div className="flex justify-between border-t pt-2"><span>Ventas ({sales.length})</span><span>{money(totalSales)}</span></div>
             <div className="flex justify-between font-bold text-primary"><span>Efectivo esperado en caja</span><span>{money(1500 + (byMethod["Efectivo"] ?? 0))}</span></div>
           </div>

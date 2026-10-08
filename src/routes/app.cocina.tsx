@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { PageHeader, Panel } from "@/components/Kpi";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { PaymentDialog } from "@/components/PaymentDialog";
+import { recordIncome } from "@/lib/erp";
 import { money } from "@/lib/data";
 import { MENU_CATS, STATUSES, deleteMenuItem, markPaid, saveMenuItem, setOrderStatus, toggleAvailable, useMenu, useOrders, type MenuItem } from "@/lib/kitchen";
 
@@ -30,8 +32,10 @@ function Kitchen() {
 
 function Board() {
   const orders = useOrders();
+  const [charge, setCharge] = useState<{ id: number; total: number } | null>(null);
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <PaymentDialog open={!!charge} amount={charge?.total ?? 0} concept={`Comanda #${charge?.id}`} onClose={() => setCharge(null)} onPaid={(m) => { if (charge) { markPaid(charge.id); recordIncome(`Comanda #${charge.id}`, charge.total, m, "Cocina"); toast.success(`Cobrado ${money(charge.total)}`); } setCharge(null); }} />
       {STATUSES.map((s, si) => {
         const list = orders.filter((o) => o.status === s);
         return (
@@ -45,7 +49,7 @@ function Board() {
                   <ul className="my-2 text-xs">{o.items.map((i) => <li key={i.id}>{i.q}× {i.name}</li>)}</ul>
                   {o.note && <p className="text-xs italic text-muted-foreground">Nota: {o.note}</p>}
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {!o.paid && <Button size="sm" variant="outline" onClick={() => { markPaid(o.id); toast.success(`Cobrado ${money(o.total)}`); }}><CreditCard className="h-3 w-3" />Cobrar</Button>}
+                    {!o.paid && <Button size="sm" variant="outline" onClick={() => setCharge({ id: o.id, total: o.total })}><CreditCard className="h-3 w-3" />Cobrar</Button>}
                     {si < STATUSES.length - 1 && <Button size="sm" className="bg-gold" onClick={() => setOrderStatus(o.id, STATUSES[si + 1]!)}>{STATUSES[si + 1]}<ArrowRight className="h-3 w-3" /></Button>}
                   </div>
                 </div>
