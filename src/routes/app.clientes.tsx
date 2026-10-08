@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { MEMBERS, daysLeft, money, type Member, type MemberStatus } from "@/lib/data";
+import { useMembers, setMembers } from "@/lib/crm";
+import { daysLeft, money, type Member, type MemberStatus } from "@/lib/data";
 
 export const Route = createFileRoute("/app/clientes")({
   head: () => ({ meta: [{ title: "Clientes y membresías — Gym Black" }, { name: "description", content: "Directorio de clientes y estado de membresías." }, { property: "og:title", content: "Clientes y membresías — Gym Black" }, { property: "og:description", content: "Directorio de clientes y estado de membresías." }] }),
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/app/clientes")({
 const FILTERS: ("Todas" | MemberStatus)[] = ["Todas", "Activa", "Vencida", "Congelada"];
 
 function Clients() {
-  const [list, setList] = useState<Member[]>(MEMBERS);
+  const list = useMembers(); const setList = setMembers;
   const [q, setQ] = useState("");
   const [f, setF] = useState<(typeof FILTERS)[number]>("Todas");
   const [plan, setPlan] = useState("Todos");

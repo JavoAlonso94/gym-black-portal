@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, Users, QrCode, ShoppingCart, Dumbbell, LineChart, LogOut, Menu, X, ChefHat, CupSoda } from "lucide-react";
+import { LayoutDashboard, Users, QrCode, ShoppingCart, Dumbbell, LineChart, LogOut, Menu, X, ChefHat, CupSoda, Target, Package } from "lucide-react";
 import logo from "@/assets/gym-black-logo.jpg.asset.json";
 import { logout, useUser } from "@/lib/auth";
 
@@ -9,6 +9,8 @@ export const Route = createFileRoute("/app")({ ssr: false, component: AppLayout 
 const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/clientes", label: "Clientes", icon: Users },
+  { to: "/app/crm", label: "CRM prospectos", icon: Target },
+  { to: "/app/paquetes", label: "Paquetes", icon: Package },
   { to: "/app/acceso", label: "Control de acceso", icon: QrCode },
   { to: "/app/pos", label: "Punto de venta", icon: ShoppingCart },
   { to: "/app/cocina", label: "Cocina y cafetería", icon: ChefHat },
