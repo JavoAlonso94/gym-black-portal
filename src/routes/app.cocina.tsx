@@ -86,7 +86,7 @@ function MenuAdmin() {
       <Dialog open={!!edit} onOpenChange={(o) => !o && setEdit(null)}>
         <DialogContent className="max-w-md">
           <DialogHeader><DialogTitle className="flex items-center gap-2"><ChefHat className="h-4 w-4 text-primary" />Platillo</DialogTitle></DialogHeader>
-          {edit && <form className="grid gap-3 text-sm" onSubmit={(e) => { e.preventDefault(); if (!edit.name) return toast.error("Escribe un nombre"); saveMenuItem(edit); setEdit(null); toast.success("Menú actualizado"); }}>
+          {edit && <form className="grid gap-3 text-sm" onSubmit={(e) => { e.preventDefault(); if (!edit.name) { toast.error("Escribe un nombre"); return; } saveMenuItem(edit); setEdit(null); toast.success("Menú actualizado"); }}>
             <input className="rounded-md border bg-background px-3 py-2" placeholder="Nombre" value={edit.name} onChange={(e) => setEdit({ ...edit, name: e.target.value })} />
             <select className="rounded-md border bg-background px-3 py-2" value={edit.cat} onChange={(e) => setEdit({ ...edit, cat: e.target.value as MenuItem["cat"] })}>{MENU_CATS.map((c) => <option key={c}>{c}</option>)}</select>
             <div className="grid grid-cols-3 gap-2">

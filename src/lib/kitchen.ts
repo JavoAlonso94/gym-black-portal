@@ -3,7 +3,7 @@ import { useSyncExternalStore } from "react";
 export type MenuCat = "Smoothies" | "Proteicos" | "Comidas" | "Bowls" | "Snacks";
 export type MenuItem = { id: string; name: string; cat: MenuCat; price: number; kcal: number; p: number; c: number; f: number; available: boolean };
 export type OrderStatus = "Pendiente" | "En preparación" | "Listo para entregar" | "Entregado";
-export type Order = { id: number; customer: string; items: { id: string; name: string; q: number; price: number }[]; total: number; status: OrderStatus; source: "POS" | "App cliente"; paid: boolean; time: string; note?: string };
+export type Order = { id: number; customer: string; items: { id: string; name: string; q: number; price: number }[]; total: number; status: OrderStatus; source: "POS" | "App cliente"; paid: boolean; time: string; note?: string | undefined };
 
 export const MENU_CATS: MenuCat[] = ["Smoothies", "Proteicos", "Comidas", "Bowls", "Snacks"];
 export const STATUSES: OrderStatus[] = ["Pendiente", "En preparación", "Listo para entregar", "Entregado"];

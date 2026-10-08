@@ -29,7 +29,7 @@ function Order() {
   const mine = orders.filter((o) => o.customer === name);
 
   const send = () => {
-    if (!items.length) return toast.error("Agrega algo a tu pedido");
+    if (!items.length) { toast.error("Agrega algo a tu pedido"); return; }
     const o = placeOrder({ customer: name, items: items.map(({ m, q }) => ({ id: m.id, name: m.name, q, price: m.price })), total, source: "App cliente", paid: payNow, note: note || undefined });
     setCart({}); setNote("");
     toast.success(`Pedido #${o.id} enviado a cocina`);
