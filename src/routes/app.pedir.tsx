@@ -6,6 +6,8 @@ import { PageHeader, Panel } from "@/components/Kpi";
 import { Button } from "@/components/ui/button";
 import { money } from "@/lib/data";
 import { useUser } from "@/lib/auth";
+import { PaymentDialog } from "@/components/PaymentDialog";
+import { recordIncome } from "@/lib/erp";
 import { MENU_CATS, placeOrder, useMenu, useOrders, type MenuCat } from "@/lib/kitchen";
 
 export const Route = createFileRoute("/app/pedir")({
@@ -28,15 +30,23 @@ function Order() {
   const name = user?.name ?? "Cliente";
   const mine = orders.filter((o) => o.customer === name);
 
+  const [payOpen, setPayOpen] = useState(false);
   const send = () => {
     if (!items.length) { toast.error("Agrega algo a tu pedido"); return; }
-    const o = placeOrder({ customer: name, items: items.map(({ m, q }) => ({ id: m.id, name: m.name, q, price: m.price })), total, source: "App cliente", paid: payNow, note: note || undefined });
+    if (payNow) { setPayOpen(true); return; }
+    submit();
+  };
+  const submit = (method?: string) => {
+    setPayOpen(false);
+    if (method) recordIncome(`Pedido cafetería ${name}`, total, method, "Cocina");
+    const o = placeOrder({ customer: name, items: items.map(({ m, q }) => ({ id: m.id, name: m.name, q, price: m.price })), total, source: "App cliente", paid: !!method, note: note || undefined });
     setCart({}); setNote("");
     toast.success(`Pedido #${o.id} enviado a cocina`);
   };
 
   return (
     <div>
+      <PaymentDialog open={payOpen} amount={total} concept="Pedido de cafetería" onClose={() => setPayOpen(false)} onPaid={(m) => submit(m)} />
       <PageHeader title="Pide tu post-entreno" subtitle="Smoothies, shakes proteicos, bowls y comidas con macros" />
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
@@ -75,7 +85,7 @@ function Order() {
             </div>
             <textarea className="mt-3 w-full rounded-md border bg-background px-3 py-2 text-sm" rows={2} placeholder="Notas (sin azúcar, leche de almendra...)" value={note} onChange={(e) => setNote(e.target.value)} />
             <div className="mt-2 grid grid-cols-2 gap-2">
-              {[true, false].map((v) => <button key={String(v)} onClick={() => setPayNow(v)} className={`rounded-md border py-2 text-xs ${payNow === v ? "border-primary text-primary" : ""}`}>{v ? "Pagar ahora (tarjeta)" : "Pagar en caja"}</button>)}
+              {[true, false].map((v) => <button key={String(v)} onClick={() => setPayNow(v)} className={`rounded-md border py-2 text-xs ${payNow === v ? "border-primary text-primary" : ""}`}>{v ? "Pagar ahora (SPEI, OXXO, Clip)" : "Pagar en caja"}</button>)}
             </div>
             <Button onClick={send} className="mt-3 w-full bg-gold font-semibold">Enviar pedido · {money(total)}</Button>
           </Panel>
