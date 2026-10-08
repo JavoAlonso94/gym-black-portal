@@ -29,7 +29,7 @@ function POS() {
   const iva = subtotal * 0.16 / 1.16;
   const add = (p: Product, d = 1) => setCart((c) => {
     const q = (c[p.id] ?? 0) + d;
-    if (q > stock[p.id]) { toast.error("Sin stock suficiente"); return c; }
+    if (q > (stock[p.id] ?? 0)) { toast.error("Sin stock suficiente"); return c; }
     const n = { ...c }; if (q <= 0) delete n[p.id]; else n[p.id] = q; return n;
   });
 
