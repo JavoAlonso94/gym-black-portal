@@ -17,6 +17,8 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAccesoRouteImport } from './routes/app.acceso'
 import { Route as AppClientesRouteImport } from './routes/app.clientes'
 import { Route as AppCocinaRouteImport } from './routes/app.cocina'
+import { Route as AppCrmRouteImport } from './routes/app.crm'
+import { Route as AppPaquetesRouteImport } from './routes/app.paquetes'
 import { Route as AppPedirRouteImport } from './routes/app.pedir'
 import { Route as AppPosRouteImport } from './routes/app.pos'
 import { Route as AppProgresoRouteImport } from './routes/app.progreso'
@@ -62,6 +64,16 @@ const AppCocinaRoute = AppCocinaRouteImport.update({
   path: '/cocina',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCrmRoute = AppCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPaquetesRoute = AppPaquetesRouteImport.update({
+  id: '/paquetes',
+  path: '/paquetes',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPedirRoute = AppPedirRouteImport.update({
   id: '/pedir',
   path: '/pedir',
@@ -91,6 +103,8 @@ export interface FileRoutesByFullPath {
   '/app/acceso': typeof AppAccesoRoute
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
+  '/app/crm': typeof AppCrmRoute
+  '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
@@ -104,6 +118,8 @@ export interface FileRoutesByTo {
   '/app/acceso': typeof AppAccesoRoute
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
+  '/app/crm': typeof AppCrmRoute
+  '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
@@ -119,6 +135,8 @@ export interface FileRoutesById {
   '/app/acceso': typeof AppAccesoRoute
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
+  '/app/crm': typeof AppCrmRoute
+  '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
@@ -135,6 +153,8 @@ export interface FileRouteTypes {
     | '/app/acceso'
     | '/app/clientes'
     | '/app/cocina'
+    | '/app/crm'
+    | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
     | '/app/progreso'
@@ -148,6 +168,8 @@ export interface FileRouteTypes {
     | '/app/acceso'
     | '/app/clientes'
     | '/app/cocina'
+    | '/app/crm'
+    | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
     | '/app/progreso'
@@ -162,6 +184,8 @@ export interface FileRouteTypes {
     | '/app/acceso'
     | '/app/clientes'
     | '/app/cocina'
+    | '/app/crm'
+    | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
     | '/app/progreso'
@@ -234,6 +258,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCocinaRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/crm': {
+      id: '/app/crm'
+      path: '/crm'
+      fullPath: '/app/crm'
+      preLoaderRoute: typeof AppCrmRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/paquetes': {
+      id: '/app/paquetes'
+      path: '/paquetes'
+      fullPath: '/app/paquetes'
+      preLoaderRoute: typeof AppPaquetesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/pedir': {
       id: '/app/pedir'
       path: '/pedir'
@@ -269,6 +307,8 @@ interface AppRouteChildren {
   AppAccesoRoute: typeof AppAccesoRoute
   AppClientesRoute: typeof AppClientesRoute
   AppCocinaRoute: typeof AppCocinaRoute
+  AppCrmRoute: typeof AppCrmRoute
+  AppPaquetesRoute: typeof AppPaquetesRoute
   AppPedirRoute: typeof AppPedirRoute
   AppPosRoute: typeof AppPosRoute
   AppProgresoRoute: typeof AppProgresoRoute
@@ -280,6 +320,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppAccesoRoute: AppAccesoRoute,
   AppClientesRoute: AppClientesRoute,
   AppCocinaRoute: AppCocinaRoute,
+  AppCrmRoute: AppCrmRoute,
+  AppPaquetesRoute: AppPaquetesRoute,
   AppPedirRoute: AppPedirRoute,
   AppPosRoute: AppPosRoute,
   AppProgresoRoute: AppProgresoRoute,
