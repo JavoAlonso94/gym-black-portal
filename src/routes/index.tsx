@@ -1,24 +1,51 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
+import { AuthShell, RolePicker } from "@/components/AuthShell";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { login, ROLES, type Role } from "@/lib/auth";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Iniciar sesión — Gym Black" },
+      { name: "description", content: "Accede a la plataforma de gestión de Gym Black." },
+      { property: "og:title", content: "Iniciar sesión — Gym Black" },
+      { property: "og:description", content: "Accede a la plataforma de gestión de Gym Black." },
+    ],
+  }),
+  component: LoginPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function LoginPage() {
+  const nav = useNavigate();
+  const [email, setEmail] = useState("admin@gymblack.mx");
+  const [pass, setPass] = useState("demo1234");
+  const [role, setRole] = useState<Role>("Administrador");
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.includes("@") || pass.length < 4) { toast.error("Credenciales inválidas"); return; }
+    login({ name: (email.split("@")[0] ?? "").replace(/\./g, " "), email, role });
+    toast.success(`Bienvenido, ${role}`);
+    nav({ to: "/app" });
+  };
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AuthShell title="Iniciar sesión" subtitle="Ingresa con tu cuenta (modo demostración).">
+      <form onSubmit={submit} className="space-y-4">
+        <div className="space-y-1.5"><Label>Correo</Label><Input value={email} onChange={(e) => setEmail(e.target.value)} /></div>
+        <div className="space-y-1.5">
+          <div className="flex justify-between"><Label>Contraseña</Label>
+            <Link to="/recuperar" className="text-xs text-primary hover:underline">¿Olvidaste tu contraseña?</Link></div>
+          <Input type="password" value={pass} onChange={(e) => setPass(e.target.value)} />
+        </div>
+        <div className="space-y-1.5"><Label>Entrar como</Label><RolePicker value={role} onChange={setRole} roles={ROLES} /></div>
+        <Button type="submit" className="w-full bg-gold font-semibold uppercase tracking-wider">Entrar</Button>
+        <p className="text-center text-sm text-muted-foreground">¿No tienes cuenta? <Link to="/registro" className="text-primary hover:underline">Regístrate</Link></p>
+      </form>
+    </AuthShell>
   );
 }

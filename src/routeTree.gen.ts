@@ -10,33 +10,146 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as RecuperarRouteImport } from './routes/recuperar'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAccesoRouteImport } from './routes/app.acceso'
+import { Route as AppClientesRouteImport } from './routes/app.clientes'
+import { Route as AppPosRouteImport } from './routes/app.pos'
+import { Route as AppProgresoRouteImport } from './routes/app.progreso'
+import { Route as AppRutinasRouteImport } from './routes/app.rutinas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarRoute = RecuperarRouteImport.update({
+  id: '/recuperar',
+  path: '/recuperar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccesoRoute = AppAccesoRouteImport.update({
+  id: '/acceso',
+  path: '/acceso',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClientesRoute = AppClientesRouteImport.update({
+  id: '/clientes',
+  path: '/clientes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPosRoute = AppPosRouteImport.update({
+  id: '/pos',
+  path: '/pos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgresoRoute = AppProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRutinasRoute = AppRutinasRouteImport.update({
+  id: '/rutinas',
+  path: '/rutinas',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/app/acceso': typeof AppAccesoRoute
+  '/app/clientes': typeof AppClientesRoute
+  '/app/pos': typeof AppPosRoute
+  '/app/progreso': typeof AppProgresoRoute
+  '/app/rutinas': typeof AppRutinasRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/app/acceso': typeof AppAccesoRoute
+  '/app/clientes': typeof AppClientesRoute
+  '/app/pos': typeof AppPosRoute
+  '/app/progreso': typeof AppProgresoRoute
+  '/app/rutinas': typeof AppRutinasRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/app/acceso': typeof AppAccesoRoute
+  '/app/clientes': typeof AppClientesRoute
+  '/app/pos': typeof AppPosRoute
+  '/app/progreso': typeof AppProgresoRoute
+  '/app/rutinas': typeof AppRutinasRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/recuperar'
+    | '/registro'
+    | '/app/acceso'
+    | '/app/clientes'
+    | '/app/pos'
+    | '/app/progreso'
+    | '/app/rutinas'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/recuperar'
+    | '/registro'
+    | '/app/acceso'
+    | '/app/clientes'
+    | '/app/pos'
+    | '/app/progreso'
+    | '/app/rutinas'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/recuperar'
+    | '/registro'
+    | '/app/acceso'
+    | '/app/clientes'
+    | '/app/pos'
+    | '/app/progreso'
+    | '/app/rutinas'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  RecuperarRoute: typeof RecuperarRoute
+  RegistroRoute: typeof RegistroRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +161,97 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar': {
+      id: '/recuperar'
+      path: '/recuperar'
+      fullPath: '/recuperar'
+      preLoaderRoute: typeof RecuperarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/acceso': {
+      id: '/app/acceso'
+      path: '/acceso'
+      fullPath: '/app/acceso'
+      preLoaderRoute: typeof AppAccesoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/clientes': {
+      id: '/app/clientes'
+      path: '/clientes'
+      fullPath: '/app/clientes'
+      preLoaderRoute: typeof AppClientesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/pos': {
+      id: '/app/pos'
+      path: '/pos'
+      fullPath: '/app/pos'
+      preLoaderRoute: typeof AppPosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/progreso': {
+      id: '/app/progreso'
+      path: '/progreso'
+      fullPath: '/app/progreso'
+      preLoaderRoute: typeof AppProgresoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/rutinas': {
+      id: '/app/rutinas'
+      path: '/rutinas'
+      fullPath: '/app/rutinas'
+      preLoaderRoute: typeof AppRutinasRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAccesoRoute: typeof AppAccesoRoute
+  AppClientesRoute: typeof AppClientesRoute
+  AppPosRoute: typeof AppPosRoute
+  AppProgresoRoute: typeof AppProgresoRoute
+  AppRutinasRoute: typeof AppRutinasRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAccesoRoute: AppAccesoRoute,
+  AppClientesRoute: AppClientesRoute,
+  AppPosRoute: AppPosRoute,
+  AppProgresoRoute: AppProgresoRoute,
+  AppRutinasRoute: AppRutinasRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  RecuperarRoute: RecuperarRoute,
+  RegistroRoute: RegistroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
