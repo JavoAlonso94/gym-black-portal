@@ -18,6 +18,7 @@ import { Route as AppAccesoRouteImport } from './routes/app.acceso'
 import { Route as AppClientesRouteImport } from './routes/app.clientes'
 import { Route as AppCocinaRouteImport } from './routes/app.cocina'
 import { Route as AppCrmRouteImport } from './routes/app.crm'
+import { Route as AppErpRouteImport } from './routes/app.erp'
 import { Route as AppPaquetesRouteImport } from './routes/app.paquetes'
 import { Route as AppPedirRouteImport } from './routes/app.pedir'
 import { Route as AppPosRouteImport } from './routes/app.pos'
@@ -69,6 +70,11 @@ const AppCrmRoute = AppCrmRouteImport.update({
   path: '/crm',
   getParentRoute: () => AppRoute,
 } as any)
+const AppErpRoute = AppErpRouteImport.update({
+  id: '/erp',
+  path: '/erp',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPaquetesRoute = AppPaquetesRouteImport.update({
   id: '/paquetes',
   path: '/paquetes',
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
   '/app/crm': typeof AppCrmRoute
+  '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
   '/app/crm': typeof AppCrmRoute
+  '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/app/clientes': typeof AppClientesRoute
   '/app/cocina': typeof AppCocinaRoute
   '/app/crm': typeof AppCrmRoute
+  '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
   '/app/pos': typeof AppPosRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/app/clientes'
     | '/app/cocina'
     | '/app/crm'
+    | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/app/clientes'
     | '/app/cocina'
     | '/app/crm'
+    | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/app/clientes'
     | '/app/cocina'
     | '/app/crm'
+    | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
     | '/app/pos'
@@ -265,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCrmRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/erp': {
+      id: '/app/erp'
+      path: '/erp'
+      fullPath: '/app/erp'
+      preLoaderRoute: typeof AppErpRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/paquetes': {
       id: '/app/paquetes'
       path: '/paquetes'
@@ -308,6 +327,7 @@ interface AppRouteChildren {
   AppClientesRoute: typeof AppClientesRoute
   AppCocinaRoute: typeof AppCocinaRoute
   AppCrmRoute: typeof AppCrmRoute
+  AppErpRoute: typeof AppErpRoute
   AppPaquetesRoute: typeof AppPaquetesRoute
   AppPedirRoute: typeof AppPedirRoute
   AppPosRoute: typeof AppPosRoute
@@ -321,6 +341,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppClientesRoute: AppClientesRoute,
   AppCocinaRoute: AppCocinaRoute,
   AppCrmRoute: AppCrmRoute,
+  AppErpRoute: AppErpRoute,
   AppPaquetesRoute: AppPaquetesRoute,
   AppPedirRoute: AppPedirRoute,
   AppPosRoute: AppPosRoute,
