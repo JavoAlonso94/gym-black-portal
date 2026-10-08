@@ -18,13 +18,13 @@ function Routines() {
   const [group, setGroup] = useState("Todos");
   const [q, setQ] = useState("");
   const [name, setName] = useState("Hipertrofia A");
-  const [member, setMember] = useState(MEMBERS[0].id);
+  const [member, setMember] = useState(MEMBERS[0]!.id);
   const [items, setItems] = useState<Item[]>([]);
   const [saved, setSaved] = useState<{ name: string; member: string; n: number }[]>([]);
 
   const list = EXERCISES.filter((e) => (group === "Todos" || e.group === group) && e.name.toLowerCase().includes(q.toLowerCase()));
   const upd = (i: number, p: Partial<Item>) => setItems((l) => l.map((x, j) => (j === i ? { ...x, ...p } : x)));
-  const move = (i: number, d: number) => setItems((l) => { const n = [...l]; const j = i + d; if (j < 0 || j >= n.length) return l; [n[i], n[j]] = [n[j], n[i]]; return n; });
+  const move = (i: number, d: number) => setItems((l) => { const n = [...l]; const j = i + d; if (j < 0 || j >= n.length) return l; [n[i], n[j]] = [n[j]!, n[i]!]; return n; });
   const mins = Math.round(items.reduce((s, i) => s + i.sets * (40 + i.rest), 0) / 60);
 
   return (

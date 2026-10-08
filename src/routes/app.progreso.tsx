@@ -69,7 +69,7 @@ function Progress() {
         <Panel title="Registrar medidas">
           <form className="space-y-3" onSubmit={(e) => {
             e.preventDefault();
-            const vals = [f.peso, f.grasa, f.cintura, f.brazo].map(Number);
+            const vals = [f.peso, f.grasa, f.cintura, f.brazo].map(Number) as [number, number, number, number];
             if (vals.some((v) => !v || v <= 0)) { toast.error("Completa todas las medidas con valores válidos"); return; }
             setData((l) => [...l, { fecha: f.fecha, peso: vals[0], grasa: vals[1], cintura: vals[2], brazo: vals[3] }].sort((a, b) => a.fecha.localeCompare(b.fecha)));
             setF({ ...f, peso: "", grasa: "", cintura: "", brazo: "" });
