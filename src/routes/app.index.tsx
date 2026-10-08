@@ -51,7 +51,7 @@ function Dashboard() {
                   <Bar dataKey="tienda" name="Tienda" stackId="a" fill="var(--chart-2)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               ) : (
-                <AreaChart data={TRAFFIC.map((t) => ({ hora: t.hora, ingresos: t.personas * 68 }))}>
+                <AreaChart data={TRAFFIC.map((t) => ({ hora: t.hora, ingresos: (t.personas ?? 0) * 68 }))}>
                   <CartesianGrid stroke="var(--border)" vertical={false} />
                   <XAxis dataKey="hora" stroke="var(--muted-foreground)" fontSize={12} />
                   <YAxis stroke="var(--muted-foreground)" fontSize={12} />

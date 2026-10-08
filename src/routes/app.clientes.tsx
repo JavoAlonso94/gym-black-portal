@@ -98,7 +98,7 @@ function Clients() {
           <DialogHeader><DialogTitle>Nuevo cliente</DialogTitle></DialogHeader>
           <form className="space-y-3" onSubmit={(e) => {
             e.preventDefault();
-            if (nm.name.length < 3 || !nm.email.includes("@")) return toast.error("Completa nombre y correo válidos");
+            if (nm.name.length < 3 || !nm.email.includes("@")) { toast.error("Completa nombre y correo válidos"); return; }
             const id = `GB-${1001 + list.length}`;
             const end = new Date("2026-11-08").toISOString().slice(0, 10);
             setList((l) => [{ id, qr: id, name: nm.name, email: nm.email, phone: "—", plan: nm.plan, status: "Activa", start: "2026-10-08", end, balance: 0, visits: 0, trainer: "Marco Ruiz" }, ...l]);

@@ -26,13 +26,13 @@ function Recover() {
   return (
     <AuthShell title="Recuperar contraseña" subtitle="Te enviaremos un código de verificación (simulado).">
       {step === 1 && (
-        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); if (!email.includes("@")) return toast.error("Correo inválido"); setStep(2); toast.success("Código enviado: 123456"); }}>
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); if (!email.includes("@")) { toast.error("Correo inválido"); return; } setStep(2); toast.success("Código enviado: 123456"); }}>
           <div className="space-y-1.5"><Label>Correo</Label><Input value={email} onChange={(e) => setEmail(e.target.value)} /></div>
           <Button className="w-full bg-gold font-semibold">Enviar código</Button>
         </form>
       )}
       {step === 2 && (
-        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); if (code !== "123456") return toast.error("Código incorrecto (usa 123456)"); setStep(3); }}>
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); if (code !== "123456") { toast.error("Código incorrecto (usa 123456)"); return; } setStep(3); }}>
           <div className="space-y-1.5"><Label>Código de 6 dígitos</Label><Input value={code} maxLength={6} onChange={(e) => setCode(e.target.value)} /></div>
           <Button className="w-full bg-gold font-semibold">Verificar</Button>
         </form>

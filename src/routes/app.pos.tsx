@@ -34,9 +34,9 @@ function POS() {
   });
 
   const pay = () => {
-    if (!items.length) return toast.error("El carrito está vacío");
+    if (!items.length) { toast.error("El carrito está vacío"); return; }
     const sale: Sale = { folio: 4822 + sales.length, items, total: subtotal, method, time: new Date().toLocaleTimeString("es-MX") };
-    setStock((s) => { const n = { ...s }; items.forEach((i) => (n[i.p.id] -= i.q)); return n; });
+    setStock((s) => { const n = { ...s }; items.forEach((i) => (n[i.p.id] = (n[i.p.id] ?? 0) - i.q)); return n; });
     setSales((s) => [sale, ...s]); setCart({}); setTicket(sale);
   };
 
@@ -112,7 +112,7 @@ function POS() {
             <div className="flex justify-between"><span>Fondo inicial</span><span>{money(1500)}</span></div>
             {["Efectivo", "Tarjeta", "Transferencia"].map((m) => <div key={m} className="flex justify-between"><span>{m}</span><span>{money(byMethod[m] ?? 0)}</span></div>)}
             <div className="flex justify-between border-t pt-2"><span>Ventas ({sales.length})</span><span>{money(totalSales)}</span></div>
-            <div className="flex justify-between font-bold text-primary"><span>Efectivo esperado en caja</span><span>{money(1500 + (byMethod.Efectivo ?? 0))}</span></div>
+            <div className="flex justify-between font-bold text-primary"><span>Efectivo esperado en caja</span><span>{money(1500 + (byMethod["Efectivo"] ?? 0))}</span></div>
           </div>
           <Button className="w-full bg-gold" onClick={() => { setSales([]); setCut(false); toast.success("Corte de caja realizado"); }}>Cerrar turno</Button>
         </DialogContent>

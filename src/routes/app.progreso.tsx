@@ -30,7 +30,7 @@ function Progress() {
   const [data, setData] = useState<M[]>(INIT);
   const [metric, setMetric] = useState<"peso" | "grasa" | "medidas">("peso");
   const [f, setF] = useState({ fecha: "2026-10-08", peso: "", grasa: "", cintura: "", brazo: "" });
-  const first = data[0], last = data[data.length - 1];
+  const first = data[0]!, last = data[data.length - 1]!;
   const imc = (last.peso / 1.78 ** 2).toFixed(1);
   const d = (k: keyof M) => ((last[k] as number) - (first[k] as number)).toFixed(1);
 
@@ -70,7 +70,7 @@ function Progress() {
           <form className="space-y-3" onSubmit={(e) => {
             e.preventDefault();
             const vals = [f.peso, f.grasa, f.cintura, f.brazo].map(Number);
-            if (vals.some((v) => !v || v <= 0)) return toast.error("Completa todas las medidas con valores válidos");
+            if (vals.some((v) => !v || v <= 0)) { toast.error("Completa todas las medidas con valores válidos"); return; }
             setData((l) => [...l, { fecha: f.fecha, peso: vals[0], grasa: vals[1], cintura: vals[2], brazo: vals[3] }].sort((a, b) => a.fecha.localeCompare(b.fecha)));
             setF({ ...f, peso: "", grasa: "", cintura: "", brazo: "" });
             toast.success("Medidas registradas");

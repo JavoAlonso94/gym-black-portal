@@ -27,8 +27,8 @@ function LoginPage() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.includes("@") || pass.length < 4) return toast.error("Credenciales inválidas");
-    login({ name: email.split("@")[0].replace(/\./g, " "), email, role });
+    if (!email.includes("@") || pass.length < 4) { toast.error("Credenciales inválidas"); return; }
+    login({ name: (email.split("@")[0] ?? "").replace(/\./g, " "), email, role });
     toast.success(`Bienvenido, ${role}`);
     nav({ to: "/app" });
   };

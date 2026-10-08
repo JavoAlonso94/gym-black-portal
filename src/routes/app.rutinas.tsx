@@ -73,7 +73,7 @@ function Routines() {
             ))}
           </ol>
           <Button className="mt-4 w-full bg-gold" onClick={() => {
-            if (!items.length) return toast.error("Agrega al menos un ejercicio");
+            if (!items.length) { toast.error("Agrega al menos un ejercicio"); return; }
             const m = MEMBERS.find((x) => x.id === member)!;
             setSaved((s) => [{ name, member: m.name, n: items.length }, ...s]); setItems([]);
             toast.success(`Rutina "${name}" asignada a ${m.name}`);

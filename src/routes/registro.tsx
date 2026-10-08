@@ -25,9 +25,9 @@ function Register() {
   const [role, setRole] = useState<Role>("Cliente");
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (f.name.length < 3) return toast.error("Escribe tu nombre completo");
-    if (!f.email.includes("@")) return toast.error("Correo inválido");
-    if (f.pass.length < 6) return toast.error("La contraseña debe tener al menos 6 caracteres");
+    if (f.name.length < 3) { toast.error("Escribe tu nombre completo"); return; }
+    if (!f.email.includes("@")) { toast.error("Correo inválido"); return; }
+    if (f.pass.length < 6) { toast.error("La contraseña debe tener al menos 6 caracteres"); return; }
     login({ name: f.name, email: f.email, role });
     toast.success("Cuenta creada");
     nav({ to: "/app" });

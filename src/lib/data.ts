@@ -12,8 +12,8 @@ const statuses: MemberStatus[] = ["Activa","Activa","Activa","Vencida","Activa",
 function fmt(d: Date) { return d.toISOString().slice(0, 10); }
 const today = new Date("2026-10-08");
 
-export const MEMBERS: Member[] = names.map((name, i) => {
-  const status = statuses[i % statuses.length];
+export const MEMBERS: Member[] = names.map((name, i): Member => {
+  const status = statuses[i % statuses.length]!;
   const start = new Date(today); start.setDate(start.getDate() - (20 + i * 9));
   const end = new Date(today);
   end.setDate(end.getDate() + (status === "Vencida" ? -(i + 2) : (i % 4) * 6 + 2));
@@ -21,9 +21,9 @@ export const MEMBERS: Member[] = names.map((name, i) => {
     id: `GB-${1001 + i}`, name,
     email: name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(" ", ".") + "@mail.com",
     phone: `55 ${String(4100 + i * 37).padStart(4, "0")} ${String(2200 + i * 91).slice(0, 4)}`,
-    plan: plans[i % plans.length], status, start: fmt(start), end: fmt(end),
+    plan: plans[i % plans.length]!, status, start: fmt(start), end: fmt(end),
     balance: status === "Vencida" ? 650 + i * 20 : i % 5 === 0 ? 300 : 0,
-    visits: 8 + ((i * 7) % 40), trainer: trainers[i % 3], qr: `GB-${1001 + i}`,
+    visits: 8 + ((i * 7) % 40), trainer: trainers[i % 3]!, qr: `GB-${1001 + i}`,
   };
 });
 
@@ -32,10 +32,10 @@ export function daysLeft(end: string) {
 }
 
 export const REVENUE = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].map((d, i) => ({
-  day: d, membresias: [8200, 6400, 9100, 7300, 10400, 5600, 2900][i], tienda: [2100, 1800, 2600, 2300, 3400, 2900, 1200][i],
+  day: d, membresias: [8200, 6400, 9100, 7300, 10400, 5600, 2900][i]!, tienda: [2100, 1800, 2600, 2300, 3400, 2900, 1200][i]!,
 }));
 export const TRAFFIC = ["6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"].map((h, i) => ({
-  hora: `${h}:00`, personas: [22, 48, 61, 40, 28, 19, 15, 21, 18, 16, 24, 45, 72, 80, 64, 38, 12][i],
+  hora: `${h}:00`, personas: [22, 48, 61, 40, 28, 19, 15, 21, 18, 16, 24, 45, 72, 80, 64, 38, 12][i]!,
 }));
 
 export const ACTIVITY = [
@@ -72,6 +72,6 @@ export const EXERCISES: Exercise[] = [
   ["Press militar","Hombros","Barra","Intermedio"],["Elevaciones laterales","Hombros","Mancuernas","Principiante"],["Face pull","Hombros","Polea","Principiante"],
   ["Curl con barra","Brazos","Barra","Principiante"],["Extensión de tríceps","Brazos","Polea","Principiante"],["Curl martillo","Brazos","Mancuernas","Principiante"],
   ["Plancha","Core","Peso corporal","Principiante"],["Rueda abdominal","Core","Rueda","Avanzado"],["Elevación de piernas","Core","Peso corporal","Intermedio"],
-].map(([name, group, equip, level], i) => ({ id: `e${i}`, name, group, equip, level }));
+].map(([name, group, equip, level], i) => ({ id: `e${i}`, name: name!, group: group!, equip: equip!, level: level! }));
 
 export const money = (n: number) => n.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
