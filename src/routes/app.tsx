@@ -20,7 +20,9 @@ function AppLayout() {
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
-  useEffect(() => { if (!user) nav({ to: "/", replace: true }); }, [user, nav]);
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
+  useEffect(() => { if (ready && !user) nav({ to: "/", replace: true }); }, [ready, user, nav]);
   useEffect(() => setOpen(false), [path]);
   if (!user) return null;
 
