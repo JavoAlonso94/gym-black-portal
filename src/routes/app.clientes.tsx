@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { PaymentDialog } from "@/components/PaymentDialog";
+import { recordIncome } from "@/lib/erp";
 import { useMembers, setMembers } from "@/lib/crm";
 import { daysLeft, money, type Member, type MemberStatus } from "@/lib/data";
 
@@ -30,6 +32,14 @@ function Clients() {
     (f === "Todas" || m.status === f) && (plan === "Todos" || m.plan === plan) &&
     (m.name + m.id + m.email).toLowerCase().includes(q.toLowerCase())), [list, q, f, plan]);
 
+  const [renew, setRenew] = useState<Member | null>(null);
+  const doRenew = (method: string) => {
+    if (!renew) return;
+    const m = list.find((x) => x.id === renew.id)!;
+    if (renew.plan === "__saldo") { recordIncome(`Saldo ${m.name}`, m.balance, method, "Membresías"); update(m, { balance: 0 }, "Pago registrado"); }
+    else { const d = new Date(Math.max(Date.parse(m.end), Date.parse("2026-10-08"))); d.setMonth(d.getMonth() + 1); recordIncome(`Renovación ${m.plan} ${m.name}`, 899 + m.balance, method, "Membresías"); update(m, { status: "Activa", end: d.toISOString().slice(0, 10), balance: 0 }, "Membresía renovada"); }
+    setRenew(null);
+  };
   const update = (m: Member, patch: Partial<Member>, msg: string) => {
     const nu = { ...m, ...patch };
     setList((l) => l.map((x) => (x.id === m.id ? nu : x)));
@@ -84,11 +94,11 @@ function Clients() {
               ))}
             </dl>
             <div className="flex flex-wrap gap-2">
-              <Button className="bg-gold" onClick={() => { const d = new Date(Math.max(Date.parse(sel.end), Date.parse("2026-10-08"))); d.setMonth(d.getMonth() + 1); update(sel, { status: "Activa", end: d.toISOString().slice(0, 10), balance: 0 }, "Membresía renovada"); }}>Renovar 1 mes</Button>
+              <Button className="bg-gold" onClick={() => setRenew(sel)}>Renovar 1 mes</Button>
               {sel.status !== "Congelada"
                 ? <Button variant="outline" onClick={() => update(sel, { status: "Congelada" }, "Membresía congelada")}>Congelar</Button>
                 : <Button variant="outline" onClick={() => update(sel, { status: "Activa" }, "Membresía reactivada")}>Descongelar</Button>}
-              {sel.balance > 0 && <Button variant="outline" onClick={() => update(sel, { balance: 0 }, "Pago registrado")}>Registrar pago</Button>}
+              {sel.balance > 0 && <Button variant="outline" onClick={() => setRenew({ ...sel, plan: "__saldo" })}>Registrar pago</Button>}
             </div>
           </>}
         </DialogContent>
@@ -115,6 +125,7 @@ function Clients() {
           </form>
         </DialogContent>
       </Dialog>
+      <PaymentDialog open={!!renew} amount={renew ? (renew.plan === "__saldo" ? renew.balance : 899 + renew.balance) : 0} concept={renew?.plan === "__saldo" ? "Pago de saldo pendiente" : "Renovación de membresía (1 mes)"} onClose={() => setRenew(null)} onPaid={doRenew} />
     </div>
   );
 }

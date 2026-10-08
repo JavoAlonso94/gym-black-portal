@@ -63,7 +63,7 @@ export function PaymentDialog({ open, amount, concept, onClose, onPaid }: { open
           </div>}
           {m === "Clip Terminal" && <div className="space-y-2 text-center">
             <p className="text-xs uppercase tracking-wider text-primary">Terminal Clip</p>
-            <div className="mx-auto w-40 rounded-xl border-2 border-primary/50 p-3 font-mono text-xs">{step === 0 ? `${money(amount)}\nAcerque o inserte tarjeta` : "APROBADA ✓"}</div>
+            <div className="mx-auto w-40 whitespace-pre-line rounded-xl border-2 border-primary/50 p-3 font-mono text-xs">{step === 0 ? `${money(amount)}\nAcerque o inserte tarjeta` : "APROBADA ✓"}</div>
             {step === 0 && <Button size="sm" variant="outline" className="w-full" onClick={() => { toast("Procesando en terminal Clip..."); setTimeout(() => setStep(1), 900); }}>Enviar cobro a terminal</Button>}
           </div>}
           {m === "Link Clip" && <div className="space-y-2">
