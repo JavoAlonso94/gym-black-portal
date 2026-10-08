@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, Users, QrCode, ShoppingCart, Dumbbell, LineChart, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Users, QrCode, ShoppingCart, Dumbbell, LineChart, LogOut, Menu, X, ChefHat, CupSoda } from "lucide-react";
 import logo from "@/assets/gym-black-logo.jpg.asset.json";
 import { logout, useUser } from "@/lib/auth";
 
@@ -11,6 +11,8 @@ const NAV = [
   { to: "/app/clientes", label: "Clientes", icon: Users },
   { to: "/app/acceso", label: "Control de acceso", icon: QrCode },
   { to: "/app/pos", label: "Punto de venta", icon: ShoppingCart },
+  { to: "/app/cocina", label: "Cocina y cafetería", icon: ChefHat },
+  { to: "/app/pedir", label: "Pedir comida", icon: CupSoda },
   { to: "/app/rutinas", label: "Rutinas", icon: Dumbbell },
   { to: "/app/progreso", label: "Perfil y progreso", icon: LineChart },
 ] as const;
