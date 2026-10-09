@@ -15,8 +15,8 @@ const photos = [
   { image: community, title: "Equilibrio", alt: "Grupo de personas estirando sobre colchonetas" },
 ];
 const videos = [
-  { src: strengthVideo.url, webm: strengthWebm.url, poster: strengthPoster.url, title: "Entrenamiento de fuerza" },
-  { src: cardioVideo.url, webm: cardioWebm.url, poster: cardioPoster.url, title: "Cardio en equipo" },
+  { src: strengthVideo, webm: strengthWebm, poster: strengthPoster, title: "Entrenamiento de fuerza" },
+  { src: cardioVideo, webm: cardioWebm, poster: cardioPoster, title: "Cardio en equipo" },
 ];
 
 export function WebsiteTrainingMedia({ id }: { id: string }) {
