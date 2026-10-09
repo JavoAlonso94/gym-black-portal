@@ -14,4 +14,10 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+  it.each(["/plantillas", "/app/plantillas", ...["signature", "performance", "balance"].flatMap(id => ["", "/planes", "/cocina", "/contacto"].map(leaf => `/web/${id}${leaf}`))])("matches the website page %s", path => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes(path);
+    expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+    expect(matches.at(-1)?.routeId).toBeDefined();
+  });
 });
