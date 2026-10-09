@@ -4,6 +4,10 @@ import conditioning from "@/assets/web-conditioning.jpg";
 import community from "@/assets/web-community.jpg";
 import strengthVideo from "@/assets/web-strength-video.mp4.asset.json";
 import cardioVideo from "@/assets/web-cardio-video.mp4.asset.json";
+import strengthWebm from "@/assets/web-strength-video.webm.asset.json";
+import cardioWebm from "@/assets/web-cardio-video.webm.asset.json";
+import strengthPoster from "@/assets/web-strength-poster.jpg.asset.json";
+import cardioPoster from "@/assets/web-cardio-poster.jpg.asset.json";
 
 const photos = [
   { image: strength, title: "Fuerza", alt: "Mujer realizando una sentadilla con mancuerna" },
@@ -11,8 +15,8 @@ const photos = [
   { image: community, title: "Equilibrio", alt: "Grupo de personas estirando sobre colchonetas" },
 ];
 const videos = [
-  { src: strengthVideo.url, title: "Entrenamiento de fuerza" },
-  { src: cardioVideo.url, title: "Cardio en equipo" },
+  { src: strengthVideo.url, webm: strengthWebm.url, poster: strengthPoster.url, title: "Entrenamiento de fuerza" },
+  { src: cardioVideo.url, webm: cardioWebm.url, poster: cardioPoster.url, title: "Cardio en equipo" },
 ];
 
 export function WebsiteTrainingMedia({ id }: { id: string }) {
@@ -30,7 +34,8 @@ export function WebsiteTrainingMedia({ id }: { id: string }) {
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {videos.map(video => <figure key={video.title}>
-          <video controls playsInline preload="metadata" aria-label={video.title} className="aspect-video w-full rounded-lg bg-muted object-contain">
+          <video controls playsInline preload="none" poster={video.poster} aria-label={video.title} className="aspect-video w-full rounded-lg bg-muted object-contain">
+            <source src={video.webm} type="video/webm" />
             <source src={video.src} type="video/mp4" />
             Tu navegador no admite este video.
           </video>
