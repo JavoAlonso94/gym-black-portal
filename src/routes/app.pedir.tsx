@@ -11,7 +11,7 @@ import { recordIncome } from "@/lib/erp";
 import { MENU_CATS, placeOrder, useMenu, useOrders, type MenuCat } from "@/lib/kitchen";
 
 export const Route = createFileRoute("/app/pedir")({
-  head: () => ({ meta: [{ title: "Pide tu comida post-entreno — Gym Black" }, { name: "description", content: "Pide batidos, bowls y comidas saludables con sus macros." }, { property: "og:title", content: "Pide tu comida post-entreno — Gym Black" }, { property: "og:description", content: "Pide batidos, bowls y comidas saludables con sus macros." }] }),
+  head: () => ({ meta: [{ title: "Pide tu comida post-entreno — Gym Black" }, { name: "description", content: "Pide batidos, bowls y comidas saludables con sus macros." }, { property: "og:title", content: "Pide tu comida post-entreno — Gym Black" }, { property: "og:description", content: "Pide batidos, bowls y comidas saludables con sus macros." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Order,
 });
 

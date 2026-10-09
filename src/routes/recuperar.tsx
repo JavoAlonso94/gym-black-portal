@@ -14,6 +14,7 @@ export const Route = createFileRoute("/recuperar")({
       { name: "description", content: "Restablece el acceso a tu cuenta de Gym Black." },
       { property: "og:title", content: "Recuperar contraseña — Gym Black" },
       { property: "og:description", content: "Restablece el acceso a tu cuenta de Gym Black." },
+          { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Recover,

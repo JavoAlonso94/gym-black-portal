@@ -14,6 +14,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Accede a la plataforma de gestión de Gym Black." },
       { property: "og:title", content: "Iniciar sesión — Gym Black" },
       { property: "og:description", content: "Accede a la plataforma de gestión de Gym Black." },
+          { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: LoginPage,

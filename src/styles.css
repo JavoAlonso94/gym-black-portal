@@ -98,6 +98,9 @@
 }
 :root { --photo-foreground: oklch(0.98 0 0); --photo-shade: oklch(0.1 0 0); }
 .website { letter-spacing: 0; }
+.website h1, .website h2, .website h3, .website p { overflow-wrap: anywhere; }
+.website .web-hero { height: auto; padding-block: 20px; }
+.website .web-hero a { white-space: normal; height: auto; min-height: 44px; text-align: center; overflow-wrap: anywhere; }
 .website[data-template="performance"] {
   --primary: oklch(0.89 0.19 125); --primary-foreground: oklch(0.14 0 0);
   --background: oklch(0.15 0 0); --foreground: oklch(0.97 0 0);

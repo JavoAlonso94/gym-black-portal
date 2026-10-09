@@ -7,16 +7,20 @@ import { Label } from "@/components/ui/label";
 import { getTemplate, gym, food } from "@/lib/website";
 import { usePacks } from "@/lib/crm";
 import { MENU_CATS, useMenu } from "@/lib/kitchen";
+import { WebsiteTrainingMedia } from "./WebsiteTrainingMedia";
+import { useWebsiteSettings } from "@/lib/website-customization";
 export function WebsiteHome({ id }: { id: string }) {
+  const settings = useWebsiteSettings(id);
   const t = getTemplate(id); if (!t) return null;
   return <>
     <section className="web-hero relative flex items-center overflow-hidden">
-      <img src={t.image} alt={id === "balance" ? "Nutrición fitness: bowl y batido" : "Instalaciones de entrenamiento de fuerza"} width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
+      <img src={settings.heroImage} alt={id === "balance" ? "Personas estirando después de entrenar" : "Personas haciendo ejercicio en el gimnasio"} width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-photo-shade/50" />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-12 text-photo-foreground md:px-10"><p className="mb-5 text-xs font-semibold uppercase">Entrenamiento / Nutrición / Comunidad</p><h1 className="max-w-2xl text-5xl font-extrabold sm:text-7xl">{t.headline}</h1><p className="mt-5 max-w-md text-lg">{t.subtitle}</p><div className="mt-8 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/web/$plantilla/planes" params={{ plantilla: id }}>Conoce los planes <ArrowUpRight /></Link></Button><Button asChild variant="outline" size="lg" className="text-foreground"><Link to="/web/$plantilla/contacto" params={{ plantilla: id }}>Agenda tu visita</Link></Button></div></div>
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-12 text-photo-foreground md:px-10"><p className="mb-5 text-xs font-semibold uppercase">{settings.eyebrow}</p><h1 className="max-w-2xl break-words text-5xl font-extrabold sm:text-7xl">{settings.headline}</h1><p className="mt-5 max-w-md break-words text-lg">{settings.subtitle}</p><div className="mt-8 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/web/$plantilla/planes" params={{ plantilla: id }}>{settings.plansButton} <ArrowUpRight /></Link></Button><Button asChild variant="outline" size="lg" className="text-foreground"><Link to="/web/$plantilla/contacto" params={{ plantilla: id }}>{settings.visitButton}</Link></Button></div></div>
     </section>
     <section className="border-b px-6 py-9"><div className="mx-auto grid max-w-7xl gap-6 sm:grid-cols-3">{[{ icon: Dumbbell, title: "Entrena con propósito", text: "Fuerza, acondicionamiento y rutinas para tus objetivos." }, { icon: Target, title: "Enfócate en tu progreso", text: "Seguimiento corporal y acompañamiento personalizado." }, { icon: Salad, title: "Nutre tus resultados", text: "Batidos, bowls y comidas con macros a la vista." }].map(x => <div key={x.title} className="flex gap-4"><x.icon className="mt-1 size-6 shrink-0 text-primary" /><div><h2 className="text-sm font-bold">{x.title}</h2><p className="mt-2 text-sm text-muted-foreground">{x.text}</p></div></div>)}</div></section>
-    <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 md:grid-cols-2"><img src={id === "balance" ? gym : food} alt={id === "balance" ? "Zona de fuerza" : "Comida saludable y smoothie"} loading="lazy" width={1536} height={1024} className="aspect-[4/3] w-full rounded-lg object-cover" /><div><p className="text-xs uppercase text-primary">Más que un gimnasio</p><h2 className="mt-4 text-3xl font-bold">Tu entrenamiento no termina en la última repetición.</h2><p className="mt-5 text-muted-foreground">Haz de tu bienestar una rutina. Combina tu membresía con sesiones de entrenamiento y nuestra cocina fitness.</p><Button asChild className="mt-7"><Link to="/web/$plantilla/cocina" params={{ plantilla: id }}>Descubre la cocina <ArrowUpRight /></Link></Button></div></section>
+    <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 md:grid-cols-2"><img src={settings.introImage} alt={id === "balance" ? "Zona de fuerza" : "Comida saludable y smoothie"} loading="lazy" width={1536} height={1024} className="aspect-[4/3] w-full rounded-lg object-cover" /><div><p className="text-xs uppercase text-primary">Más que un gimnasio</p><h2 className="mt-4 text-3xl font-bold">{settings.introTitle}</h2><p className="mt-5 text-muted-foreground">{settings.introText}</p><Button asChild className="mt-7"><Link to="/web/$plantilla/cocina" params={{ plantilla: id }}>Descubre la cocina <ArrowUpRight /></Link></Button></div></section>
+    <WebsiteTrainingMedia id={id} />
   </>;
 }
 export function WebsitePlans({ id }: { id: string }) {

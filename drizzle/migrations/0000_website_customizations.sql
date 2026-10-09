@@ -1,0 +1,11 @@
+CREATE TABLE public.website_customizations (owner_id uuid NOT NULL, template_id text NOT NULL CHECK (template_id IN ('signature','performance','balance')), settings jsonb NOT NULL DEFAULT '{}'::jsonb, updated_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(owner_id, template_id));
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.website_customizations TO authenticated;
+GRANT ALL ON public.website_customizations TO service_role;
+ALTER TABLE public.website_customizations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Owners read designs" ON public.website_customizations FOR SELECT TO authenticated USING (owner_id = (SELECT auth.uid()));
+CREATE POLICY "Owners insert designs" ON public.website_customizations FOR INSERT TO authenticated WITH CHECK (owner_id = (SELECT auth.uid()));
+CREATE POLICY "Owners update designs" ON public.website_customizations FOR UPDATE TO authenticated USING (owner_id = (SELECT auth.uid())) WITH CHECK (owner_id = (SELECT auth.uid()));
+CREATE POLICY "Owners delete designs" ON public.website_customizations FOR DELETE TO authenticated USING (owner_id = (SELECT auth.uid()));
+CREATE POLICY "Owners read website images" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'website-images' AND (storage.foldername(name))[1] = (SELECT auth.uid())::text);
+CREATE POLICY "Owners upload website images" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'website-images' AND (storage.foldername(name))[1] = (SELECT auth.uid())::text);
+CREATE POLICY "Owners delete website images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'website-images' AND (storage.foldername(name))[1] = (SELECT auth.uid())::text);

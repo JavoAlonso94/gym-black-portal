@@ -11,7 +11,7 @@ import { money } from "@/lib/data";
 import { MENU_CATS, STATUSES, deleteMenuItem, markPaid, saveMenuItem, setOrderStatus, toggleAvailable, useMenu, useOrders, type MenuItem } from "@/lib/kitchen";
 
 export const Route = createFileRoute("/app/cocina")({
-  head: () => ({ meta: [{ title: "Cocina y cafetería fitness — Gym Black" }, { name: "description", content: "Comandas de cocina, Smoothie & Protein Bar y gestión de menú con macros." }, { property: "og:title", content: "Cocina y cafetería fitness — Gym Black" }, { property: "og:description", content: "Comandas de cocina, Smoothie & Protein Bar y gestión de menú con macros." }] }),
+  head: () => ({ meta: [{ title: "Cocina y cafetería fitness — Gym Black" }, { name: "description", content: "Comandas de cocina, Smoothie & Protein Bar y gestión de menú con macros." }, { property: "og:title", content: "Cocina y cafetería fitness — Gym Black" }, { property: "og:description", content: "Comandas de cocina, Smoothie & Protein Bar y gestión de menú con macros." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Kitchen,
 });
 
