@@ -91,3 +91,28 @@
 @utility bg-gold { background-image: var(--gradient-gold); }
 @utility text-gold { background-image: var(--gradient-gold); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @utility tracking-brand { letter-spacing: 0.3em; }
+
+@theme inline {
+  --color-photo-foreground: var(--photo-foreground);
+  --color-photo-shade: var(--photo-shade);
+}
+:root { --photo-foreground: oklch(0.98 0 0); --photo-shade: oklch(0.1 0 0); }
+.website { letter-spacing: 0; }
+.website[data-template="performance"] {
+  --primary: oklch(0.89 0.19 125); --primary-foreground: oklch(0.14 0 0);
+  --background: oklch(0.15 0 0); --foreground: oklch(0.97 0 0);
+  --card: oklch(0.21 0 0); --border: oklch(0.32 0 0);
+}
+.website[data-template="balance"] {
+  --background: oklch(0.98 0.005 150); --foreground: oklch(0.24 0.03 155);
+  --primary: oklch(0.43 0.1 155); --primary-foreground: oklch(0.98 0 0);
+  --card: oklch(1 0 0); --card-foreground: oklch(0.24 0.03 155);
+  --muted: oklch(0.94 0.015 150); --muted-foreground: oklch(0.47 0.025 155);
+  --secondary: oklch(0.92 0.025 150); --secondary-foreground: oklch(0.24 0.03 155);
+  --accent: oklch(0.9 0.03 150); --accent-foreground: oklch(0.24 0.03 155);
+  --border: oklch(0.84 0.02 150); --input: oklch(0.8 0.02 150); --ring: oklch(0.43 0.1 155);
+}
+.website[data-template="performance"] h1 { text-transform: uppercase; }
+.website[data-template="balance"] h1 { font-weight: 600; }
+.web-hero { min-height: 520px; height: min(640px, 72svh); }
+@media (max-width: 640px) { .web-hero { min-height: 480px; height: 68svh; } }
