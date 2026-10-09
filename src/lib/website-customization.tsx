@@ -29,7 +29,7 @@ export function defaultSettings(id: string): WebsiteSettings {
 }
 export function readableColor(hex: string) {
   const rgb = hex.replace("#", "").match(/.{2}/g)?.map(x => parseInt(x, 16)) ?? [0, 0, 0];
-  return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000 > 150 ? "#141414" : "#FAFAFA";
+  return ((rgb[0] ?? 0) * 299 + (rgb[1] ?? 0) * 587 + (rgb[2] ?? 0) * 114) / 1000 > 150 ? "#141414" : "#FAFAFA";
 }
 export function themeStyle(settings: WebsiteSettings): CSSProperties {
   return {
