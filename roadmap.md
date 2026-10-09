@@ -5,3 +5,4 @@
 - [x] ERP: cuentas por cobrar, egresos, proveedores/compras con inventario, flujo de caja, auditoría
 - [x] Galería de tres plantillas elegibles con sitios completos de inicio, planes, cocina y contacto
 - [ ] Fotos de personas entrenando y dos videos reproducibles en las plantillas
+- [ ] Editor de textos, imágenes y colores por plantilla con guardado y vista previa personalizada
