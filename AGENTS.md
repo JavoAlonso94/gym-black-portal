@@ -11,3 +11,4 @@
 
 - Auth is simulated client-side (src/lib/auth.ts, localStorage) and /app routes are ssr:false; all module data is mock in src/lib/data.ts — no backend yet.
 - Public website templates share a browser-safe definition module and a dynamic layout with separate content leaves; template choice remains session-only to preserve the frontend demo boundary.
+- Website training media is shared across templates; generated photos use bundled imports and videos use CDN asset pointers with user-initiated native playback to avoid unsolicited motion and downloads.

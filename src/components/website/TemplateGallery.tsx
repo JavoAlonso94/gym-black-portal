@@ -15,7 +15,7 @@ export function TemplateGallery({ embedded = false }: { embedded?: boolean }) {
       <div className="grid gap-6 xl:grid-cols-3">
         {TEMPLATES.map((t, i) => <article key={t.id} className="overflow-hidden rounded-lg border bg-card">
           <div className="website relative aspect-[4/3] overflow-hidden bg-background" data-template={t.id}>
-            <img src={t.image} alt={t.id === "balance" ? "Bowls y batidos fitness" : "Sala de fuerza de gimnasio"} width={1536} height={1024} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+            <img src={t.image} alt={t.id === "balance" ? "Personas estirando después de entrenar" : "Personas entrenando en el gimnasio"} width={1536} height={1024} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-photo-shade/45" />
             <div className="relative flex h-full flex-col justify-between p-6 text-photo-foreground">
               <div className="flex items-center justify-between text-[10px] font-bold"><span>GYM BLACK</span><span>ENTRENA · NUTRE · SUPERA</span></div>
