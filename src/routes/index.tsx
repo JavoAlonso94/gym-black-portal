@@ -45,6 +45,7 @@ function LoginPage() {
         <div className="space-y-1.5"><Label>Entrar como</Label><RolePicker value={role} onChange={setRole} roles={ROLES} /></div>
         <Button type="submit" className="w-full bg-gold font-semibold uppercase tracking-wider">Entrar</Button>
         <p className="text-center text-sm text-muted-foreground">¿No tienes cuenta? <Link to="/registro" className="text-primary hover:underline">Regístrate</Link></p>
+        <div className="border-t pt-4 text-center"><Button asChild variant="outline" className="w-full"><Link to="/plantillas">Explorar plantillas web</Link></Button></div>
       </form>
     </AuthShell>
   );

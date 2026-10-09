@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Auth is simulated client-side (src/lib/auth.ts, localStorage) and /app routes are ssr:false; all module data is mock in src/lib/data.ts — no backend yet.
+- Public website templates share a browser-safe definition module and a dynamic layout with separate content leaves; template choice remains session-only to preserve the frontend demo boundary.
