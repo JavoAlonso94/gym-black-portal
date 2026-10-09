@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as PlantillasRouteImport } from './routes/plantillas'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as AppIndexRouteImport } from './routes/app.index'
@@ -21,9 +22,15 @@ import { Route as AppCrmRouteImport } from './routes/app.crm'
 import { Route as AppErpRouteImport } from './routes/app.erp'
 import { Route as AppPaquetesRouteImport } from './routes/app.paquetes'
 import { Route as AppPedirRouteImport } from './routes/app.pedir'
+import { Route as AppPlantillasRouteImport } from './routes/app.plantillas'
 import { Route as AppPosRouteImport } from './routes/app.pos'
 import { Route as AppProgresoRouteImport } from './routes/app.progreso'
 import { Route as AppRutinasRouteImport } from './routes/app.rutinas'
+import { Route as WebPlantillaRouteImport } from './routes/web.$plantilla'
+import { Route as WebPlantillaIndexRouteImport } from './routes/web.$plantilla.index'
+import { Route as WebPlantillaCocinaRouteImport } from './routes/web.$plantilla.cocina'
+import { Route as WebPlantillaContactoRouteImport } from './routes/web.$plantilla.contacto'
+import { Route as WebPlantillaPlanesRouteImport } from './routes/web.$plantilla.planes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,6 +40,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlantillasRoute = PlantillasRouteImport.update({
+  id: '/plantillas',
+  path: '/plantillas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecuperarRoute = RecuperarRouteImport.update({
@@ -85,6 +97,11 @@ const AppPedirRoute = AppPedirRouteImport.update({
   path: '/pedir',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPlantillasRoute = AppPlantillasRouteImport.update({
+  id: '/plantillas',
+  path: '/plantillas',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPosRoute = AppPosRouteImport.update({
   id: '/pos',
   path: '/pos',
@@ -100,10 +117,36 @@ const AppRutinasRoute = AppRutinasRouteImport.update({
   path: '/rutinas',
   getParentRoute: () => AppRoute,
 } as any)
+const WebPlantillaRoute = WebPlantillaRouteImport.update({
+  id: '/web/$plantilla',
+  path: '/web/$plantilla',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebPlantillaIndexRoute = WebPlantillaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WebPlantillaRoute,
+} as any)
+const WebPlantillaCocinaRoute = WebPlantillaCocinaRouteImport.update({
+  id: '/cocina',
+  path: '/cocina',
+  getParentRoute: () => WebPlantillaRoute,
+} as any)
+const WebPlantillaContactoRoute = WebPlantillaContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => WebPlantillaRoute,
+} as any)
+const WebPlantillaPlanesRoute = WebPlantillaPlanesRouteImport.update({
+  id: '/planes',
+  path: '/planes',
+  getParentRoute: () => WebPlantillaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/plantillas': typeof PlantillasRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/app/acceso': typeof AppAccesoRoute
@@ -113,13 +156,20 @@ export interface FileRoutesByFullPath {
   '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
+  '/app/plantillas': typeof AppPlantillasRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
   '/app/rutinas': typeof AppRutinasRoute
+  '/web/$plantilla': typeof WebPlantillaRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/web/$plantilla/cocina': typeof WebPlantillaCocinaRoute
+  '/web/$plantilla/contacto': typeof WebPlantillaContactoRoute
+  '/web/$plantilla/planes': typeof WebPlantillaPlanesRoute
+  '/web/$plantilla/': typeof WebPlantillaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/plantillas': typeof PlantillasRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/app/acceso': typeof AppAccesoRoute
@@ -129,15 +179,21 @@ export interface FileRoutesByTo {
   '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
+  '/app/plantillas': typeof AppPlantillasRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
   '/app/rutinas': typeof AppRutinasRoute
   '/app': typeof AppIndexRoute
+  '/web/$plantilla/cocina': typeof WebPlantillaCocinaRoute
+  '/web/$plantilla/contacto': typeof WebPlantillaContactoRoute
+  '/web/$plantilla/planes': typeof WebPlantillaPlanesRoute
+  '/web/$plantilla': typeof WebPlantillaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/plantillas': typeof PlantillasRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/app/acceso': typeof AppAccesoRoute
@@ -147,16 +203,23 @@ export interface FileRoutesById {
   '/app/erp': typeof AppErpRoute
   '/app/paquetes': typeof AppPaquetesRoute
   '/app/pedir': typeof AppPedirRoute
+  '/app/plantillas': typeof AppPlantillasRoute
   '/app/pos': typeof AppPosRoute
   '/app/progreso': typeof AppProgresoRoute
   '/app/rutinas': typeof AppRutinasRoute
+  '/web/$plantilla': typeof WebPlantillaRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/web/$plantilla/cocina': typeof WebPlantillaCocinaRoute
+  '/web/$plantilla/contacto': typeof WebPlantillaContactoRoute
+  '/web/$plantilla/planes': typeof WebPlantillaPlanesRoute
+  '/web/$plantilla/': typeof WebPlantillaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/app'
+    | '/plantillas'
     | '/recuperar'
     | '/registro'
     | '/app/acceso'
@@ -166,13 +229,20 @@ export interface FileRouteTypes {
     | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
+    | '/app/plantillas'
     | '/app/pos'
     | '/app/progreso'
     | '/app/rutinas'
+    | '/web/$plantilla'
     | '/app/'
+    | '/web/$plantilla/cocina'
+    | '/web/$plantilla/contacto'
+    | '/web/$plantilla/planes'
+    | '/web/$plantilla/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/plantillas'
     | '/recuperar'
     | '/registro'
     | '/app/acceso'
@@ -182,14 +252,20 @@ export interface FileRouteTypes {
     | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
+    | '/app/plantillas'
     | '/app/pos'
     | '/app/progreso'
     | '/app/rutinas'
     | '/app'
+    | '/web/$plantilla/cocina'
+    | '/web/$plantilla/contacto'
+    | '/web/$plantilla/planes'
+    | '/web/$plantilla'
   id:
     | '__root__'
     | '/'
     | '/app'
+    | '/plantillas'
     | '/recuperar'
     | '/registro'
     | '/app/acceso'
@@ -199,17 +275,25 @@ export interface FileRouteTypes {
     | '/app/erp'
     | '/app/paquetes'
     | '/app/pedir'
+    | '/app/plantillas'
     | '/app/pos'
     | '/app/progreso'
     | '/app/rutinas'
+    | '/web/$plantilla'
     | '/app/'
+    | '/web/$plantilla/cocina'
+    | '/web/$plantilla/contacto'
+    | '/web/$plantilla/planes'
+    | '/web/$plantilla/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  PlantillasRoute: typeof PlantillasRoute
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
+  WebPlantillaRoute: typeof WebPlantillaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -226,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plantillas': {
+      id: '/plantillas'
+      path: '/plantillas'
+      fullPath: '/plantillas'
+      preLoaderRoute: typeof PlantillasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recuperar': {
@@ -298,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPedirRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/plantillas': {
+      id: '/app/plantillas'
+      path: '/plantillas'
+      fullPath: '/app/plantillas'
+      preLoaderRoute: typeof AppPlantillasRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/pos': {
       id: '/app/pos'
       path: '/pos'
@@ -319,6 +417,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRutinasRouteImport
       parentRoute: typeof AppRoute
     }
+    '/web/$plantilla': {
+      id: '/web/$plantilla'
+      path: '/web/$plantilla'
+      fullPath: '/web/$plantilla'
+      preLoaderRoute: typeof WebPlantillaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/web/$plantilla/': {
+      id: '/web/$plantilla/'
+      path: '/'
+      fullPath: '/web/$plantilla/'
+      preLoaderRoute: typeof WebPlantillaIndexRouteImport
+      parentRoute: typeof WebPlantillaRoute
+    }
+    '/web/$plantilla/cocina': {
+      id: '/web/$plantilla/cocina'
+      path: '/cocina'
+      fullPath: '/web/$plantilla/cocina'
+      preLoaderRoute: typeof WebPlantillaCocinaRouteImport
+      parentRoute: typeof WebPlantillaRoute
+    }
+    '/web/$plantilla/contacto': {
+      id: '/web/$plantilla/contacto'
+      path: '/contacto'
+      fullPath: '/web/$plantilla/contacto'
+      preLoaderRoute: typeof WebPlantillaContactoRouteImport
+      parentRoute: typeof WebPlantillaRoute
+    }
+    '/web/$plantilla/planes': {
+      id: '/web/$plantilla/planes'
+      path: '/planes'
+      fullPath: '/web/$plantilla/planes'
+      preLoaderRoute: typeof WebPlantillaPlanesRouteImport
+      parentRoute: typeof WebPlantillaRoute
+    }
   }
 }
 
@@ -330,6 +463,7 @@ interface AppRouteChildren {
   AppErpRoute: typeof AppErpRoute
   AppPaquetesRoute: typeof AppPaquetesRoute
   AppPedirRoute: typeof AppPedirRoute
+  AppPlantillasRoute: typeof AppPlantillasRoute
   AppPosRoute: typeof AppPosRoute
   AppProgresoRoute: typeof AppProgresoRoute
   AppRutinasRoute: typeof AppRutinasRoute
@@ -344,6 +478,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppErpRoute: AppErpRoute,
   AppPaquetesRoute: AppPaquetesRoute,
   AppPedirRoute: AppPedirRoute,
+  AppPlantillasRoute: AppPlantillasRoute,
   AppPosRoute: AppPosRoute,
   AppProgresoRoute: AppProgresoRoute,
   AppRutinasRoute: AppRutinasRoute,
@@ -352,11 +487,31 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface WebPlantillaRouteChildren {
+  WebPlantillaCocinaRoute: typeof WebPlantillaCocinaRoute
+  WebPlantillaContactoRoute: typeof WebPlantillaContactoRoute
+  WebPlantillaPlanesRoute: typeof WebPlantillaPlanesRoute
+  WebPlantillaIndexRoute: typeof WebPlantillaIndexRoute
+}
+
+const WebPlantillaRouteChildren: WebPlantillaRouteChildren = {
+  WebPlantillaCocinaRoute: WebPlantillaCocinaRoute,
+  WebPlantillaContactoRoute: WebPlantillaContactoRoute,
+  WebPlantillaPlanesRoute: WebPlantillaPlanesRoute,
+  WebPlantillaIndexRoute: WebPlantillaIndexRoute,
+}
+
+const WebPlantillaRouteWithChildren = WebPlantillaRoute._addFileChildren(
+  WebPlantillaRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  PlantillasRoute: PlantillasRoute,
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
+  WebPlantillaRoute: WebPlantillaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
