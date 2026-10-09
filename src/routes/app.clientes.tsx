@@ -13,7 +13,7 @@ import { useMembers, setMembers } from "@/lib/crm";
 import { daysLeft, money, type Member, type MemberStatus } from "@/lib/data";
 
 export const Route = createFileRoute("/app/clientes")({
-  head: () => ({ meta: [{ title: "Clientes y membresías — Gym Black" }, { name: "description", content: "Directorio de clientes y estado de membresías." }, { property: "og:title", content: "Clientes y membresías — Gym Black" }, { property: "og:description", content: "Directorio de clientes y estado de membresías." }] }),
+  head: () => ({ meta: [{ title: "Clientes y membresías — Gym Black" }, { name: "description", content: "Directorio de clientes y estado de membresías." }, { property: "og:title", content: "Clientes y membresías — Gym Black" }, { property: "og:description", content: "Directorio de clientes y estado de membresías." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Clients,
 });
 

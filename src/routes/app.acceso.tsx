@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { MEMBERS, daysLeft, type Member } from "@/lib/data";
 
 export const Route = createFileRoute("/app/acceso")({
-  head: () => ({ meta: [{ title: "Control de acceso QR — Gym Black" }, { name: "description", content: "Valida el acceso de los miembros con código QR." }, { property: "og:title", content: "Control de acceso QR — Gym Black" }, { property: "og:description", content: "Valida el acceso de los miembros con código QR." }] }),
+  head: () => ({ meta: [{ title: "Control de acceso QR — Gym Black" }, { name: "description", content: "Valida el acceso de los miembros con código QR." }, { property: "og:title", content: "Control de acceso QR — Gym Black" }, { property: "og:description", content: "Valida el acceso de los miembros con código QR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Access,
 });
 

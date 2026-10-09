@@ -14,6 +14,7 @@ export const Route = createFileRoute("/registro")({
       { name: "description", content: "Regístrate en Gym Black y elige tu rol." },
       { property: "og:title", content: "Crear cuenta — Gym Black" },
       { property: "og:description", content: "Regístrate en Gym Black y elige tu rol." },
+          { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Register,

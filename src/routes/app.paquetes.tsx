@@ -9,7 +9,7 @@ import { money } from "@/lib/data";
 import { BRANCHES, deletePack, savePack, sendPackToPos, useLeads, useMembers, usePacks, type Pack } from "@/lib/crm";
 
 export const Route = createFileRoute("/app/paquetes")({
-  head: () => ({ meta: [{ title: "Paquetes comerciales — Gym Black" }, { name: "description", content: "Catálogo, creación y venta de paquetes combinados de membresía, entrenador y cafetería." }, { property: "og:title", content: "Paquetes comerciales — Gym Black" }, { property: "og:description", content: "Catálogo, creación y venta de paquetes combinados de membresía, entrenador y cafetería." }] }),
+  head: () => ({ meta: [{ title: "Paquetes comerciales — Gym Black" }, { name: "description", content: "Catálogo, creación y venta de paquetes combinados de membresía, entrenador y cafetería." }, { property: "og:title", content: "Paquetes comerciales — Gym Black" }, { property: "og:description", content: "Catálogo, creación y venta de paquetes combinados de membresía, entrenador y cafetería." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Packs,
 });
 

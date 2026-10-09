@@ -9,7 +9,7 @@ import { money } from "@/lib/data";
 import { CHANNELS, STAGES, convertLead, deleteLead, saveLead, useLeads, type Lead } from "@/lib/crm";
 
 export const Route = createFileRoute("/app/crm")({
-  head: () => ({ meta: [{ title: "CRM de prospectos — Gym Black" }, { name: "description", content: "Pipeline comercial de leads, seguimiento y conversión a socios." }, { property: "og:title", content: "CRM de prospectos — Gym Black" }, { property: "og:description", content: "Pipeline comercial de leads, seguimiento y conversión a socios." }] }),
+  head: () => ({ meta: [{ title: "CRM de prospectos — Gym Black" }, { name: "description", content: "Pipeline comercial de leads, seguimiento y conversión a socios." }, { property: "og:title", content: "CRM de prospectos — Gym Black" }, { property: "og:description", content: "Pipeline comercial de leads, seguimiento y conversión a socios." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: CRM,
 });
 

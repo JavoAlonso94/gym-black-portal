@@ -8,7 +8,7 @@ import { ACTIVITY, MEMBERS, REVENUE, TRAFFIC, daysLeft, money } from "@/lib/data
 import { useUser } from "@/lib/auth";
 
 export const Route = createFileRoute("/app/")({
-  head: () => ({ meta: [{ title: "Dashboard — Gym Black" }, { name: "description", content: "KPIs, ingresos y afluencia del gimnasio." }, { property: "og:title", content: "Dashboard — Gym Black" }, { property: "og:description", content: "KPIs, ingresos y afluencia del gimnasio." }] }),
+  head: () => ({ meta: [{ title: "Dashboard — Gym Black" }, { name: "description", content: "KPIs, ingresos y afluencia del gimnasio." }, { property: "og:title", content: "Dashboard — Gym Black" }, { property: "og:description", content: "KPIs, ingresos y afluencia del gimnasio." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Dashboard,
 });
 

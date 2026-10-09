@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { EXERCISES, MEMBERS, MUSCLES, type Exercise } from "@/lib/data";
 
 export const Route = createFileRoute("/app/rutinas")({
-  head: () => ({ meta: [{ title: "Rutinas y ejercicios — Gym Black" }, { name: "description", content: "Catálogo de ejercicios y constructor de rutinas." }, { property: "og:title", content: "Rutinas y ejercicios — Gym Black" }, { property: "og:description", content: "Catálogo de ejercicios y constructor de rutinas." }] }),
+  head: () => ({ meta: [{ title: "Rutinas y ejercicios — Gym Black" }, { name: "description", content: "Catálogo de ejercicios y constructor de rutinas." }, { property: "og:title", content: "Rutinas y ejercicios — Gym Black" }, { property: "og:description", content: "Catálogo de ejercicios y constructor de rutinas." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Routines,
 });
 

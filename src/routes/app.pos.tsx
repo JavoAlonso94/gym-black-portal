@@ -12,7 +12,7 @@ import { changeStock, recordIncome, useStock } from "@/lib/erp";
 import { clearPosCharges, removePosCharge, usePosCharges } from "@/lib/crm";
 
 export const Route = createFileRoute("/app/pos")({
-  head: () => ({ meta: [{ title: "Punto de venta y caja — Gym Black" }, { name: "description", content: "Venta de suplementos, ropa y bebidas con corte de caja." }, { property: "og:title", content: "Punto de venta y caja — Gym Black" }, { property: "og:description", content: "Venta de suplementos, ropa y bebidas con corte de caja." }] }),
+  head: () => ({ meta: [{ title: "Punto de venta y caja — Gym Black" }, { name: "description", content: "Venta de suplementos, ropa y bebidas con corte de caja." }, { property: "og:title", content: "Punto de venta y caja — Gym Black" }, { property: "og:description", content: "Venta de suplementos, ropa y bebidas con corte de caja." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: POS,
 });
 

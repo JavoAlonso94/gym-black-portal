@@ -10,7 +10,7 @@ import { PRODUCTS, money } from "@/lib/data";
 import { EXP_CATS, addExpense, addPayment, addSupplier, createPO, payExpense, receivePO, remind, useAudit, useExpenses, useIncomes, usePOs, useReceivables, useStock, useSuppliers, type Expense, type Supplier } from "@/lib/erp";
 
 export const Route = createFileRoute("/app/erp")({
-  head: () => ({ meta: [{ title: "ERP financiero — Gym Black" }, { name: "description", content: "Cuentas por cobrar y pagar, egresos, proveedores, compras, flujo de caja y auditoría." }, { property: "og:title", content: "ERP financiero — Gym Black" }, { property: "og:description", content: "Cuentas por cobrar y pagar, egresos, proveedores, compras, flujo de caja y auditoría." }] }),
+  head: () => ({ meta: [{ title: "ERP financiero — Gym Black" }, { name: "description", content: "Cuentas por cobrar y pagar, egresos, proveedores, compras, flujo de caja y auditoría." }, { property: "og:title", content: "ERP financiero — Gym Black" }, { property: "og:description", content: "Cuentas por cobrar y pagar, egresos, proveedores, compras, flujo de caja y auditoría." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: ERP,
 });
 

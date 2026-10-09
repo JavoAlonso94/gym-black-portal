@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { useUser } from "@/lib/auth";
 
 export const Route = createFileRoute("/app/progreso")({
-  head: () => ({ meta: [{ title: "Perfil y progreso — Gym Black" }, { name: "description", content: "Registro de medidas corporales y evolución física." }, { property: "og:title", content: "Perfil y progreso — Gym Black" }, { property: "og:description", content: "Registro de medidas corporales y evolución física." }] }),
+  head: () => ({ meta: [{ title: "Perfil y progreso — Gym Black" }, { name: "description", content: "Registro de medidas corporales y evolución física." }, { property: "og:title", content: "Perfil y progreso — Gym Black" }, { property: "og:description", content: "Registro de medidas corporales y evolución física." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Progress,
 });
 
