@@ -2,12 +2,12 @@ import { useWebsiteSettings } from "@/lib/website-customization";
 import strength from "@/assets/web-strength.jpg";
 import conditioning from "@/assets/web-conditioning.jpg";
 import community from "@/assets/web-community.jpg";
-import strengthVideo from "@/assets/web-strength-video.mp4.asset.json";
-import cardioVideo from "@/assets/web-cardio-video.mp4.asset.json";
-import strengthWebm from "@/assets/web-strength-video.webm.asset.json";
-import cardioWebm from "@/assets/web-cardio-video.webm.asset.json";
-import strengthPoster from "@/assets/web-strength-poster.jpg.asset.json";
-import cardioPoster from "@/assets/web-cardio-poster.jpg.asset.json";
+import strengthVideo from "@/assets/web-strength-video.mp4";
+import cardioVideo from "@/assets/web-cardio-video.mp4";
+import strengthWebm from "@/assets/web-strength-video.webm";
+import cardioWebm from "@/assets/web-cardio-video.webm";
+import strengthPoster from "@/assets/web-strength-poster.jpg";
+import cardioPoster from "@/assets/web-cardio-poster.jpg";
 
 const photos = [
   { image: strength, title: "Fuerza", alt: "Mujer realizando una sentadilla con mancuerna" },

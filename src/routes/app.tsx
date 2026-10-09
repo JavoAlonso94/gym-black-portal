@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { LayoutDashboard, Users, QrCode, ShoppingCart, Dumbbell, LineChart, LogOut, Menu, X, ChefHat, CupSoda, Target, Package, Landmark, PanelsTopLeft } from "lucide-react";
-import logo from "@/assets/gym-black-logo.jpg.asset.json";
+import logo from "@/assets/gym-black-logo.jpg";
 import { logout, useUser } from "@/lib/auth";
 
 export const Route = createFileRoute("/app")({ ssr: false, component: AppLayout });
@@ -34,7 +34,7 @@ function AppLayout() {
 
   const side = (
     <aside className="flex h-full w-64 flex-col border-r bg-sidebar p-4">
-      <img src={logo.url} alt="Gym Black" className="mx-auto mb-6 h-28 w-full rounded-lg object-cover object-center" />
+      <img src={logo} alt="Gym Black" className="mx-auto mb-6 h-28 w-full rounded-lg object-cover object-center" />
       <nav className="flex-1 space-y-1">
         {NAV.map((n) => {
           const active = n.to === "/app" ? path === "/app" || path === "/app/" : path.startsWith(n.to);
